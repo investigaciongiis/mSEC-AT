@@ -51,7 +51,7 @@ It combines:
 Watch a single video covering installation, configuration, and a demo of the application:
 
 
-[![🎥 Installation & Demo](https://img.youtube.com/vi/PY3NXN5IN8Y/maxresdefault.jpg)](https://youtu.be/PY3NXN5IN8Y)
+[![🎥 Installation & Demo](https://img.youtube.com/vi/aVMil_rgBEc/maxresdefault.jpg)](https://youtu.be/aVMil_rgBEc)
 
 
 ## ⚙️ How it works
