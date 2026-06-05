@@ -427,22 +427,23 @@ Create the following:
 
 
 > ⚠️ **LLM Configuration:**  
+> The pipeline requires a valid LLM endpoint to generate AI-based analysis.
 >
->The pipeline requires a valid LLM endpoint to generate AI-based analysis.
+> The default/example configuration uses OpenAI ChatGPT models. However, the LLM backend is configured through `LLM_BASE_URL` and `LLM_MODEL`. mSEC-AT uses the OpenAI Python client library as a communication layer, but it is not limited to OpenAI-hosted models. Any OpenAI-compatible endpoint can be used, including locally hosted or privately deployed models served through tools such as Ollama or vLLM.
 >
->The default/example configuration uses OpenAI ChatGPT models. However, the LLM backend is configured through LLM_BASE_URL and LLM_MODEL. mSEC-AT uses the OpenAI Python client library as a communication layer, but it is not limited to OpenAI-hosted models. Any OpenAI-compatible endpoint can be used, including locally hosted or privately deployed models served through tools such as Ollama or vLLM.
->Example configurations:
+> Example configurations:
 >
-># OpenAI-hosted model
->LLM_BASE_URL=https://api.openai.com/v1
->LLM_MODEL=gpt-5.4
+> ```text
+> # OpenAI-hosted model
+> LLM_BASE_URL=https://api.openai.com/v1
+> LLM_MODEL=gpt-5.4
 >
-># Local Ollama-compatible endpoint
->LLM_BASE_URL=http://localhost:11434/v1
->LLM_MODEL=<local-model-name>
+> # Local Ollama-compatible endpoint
+> LLM_BASE_URL=http://localhost:11434/v1
+> LLM_MODEL=<local-model-name>
+> ```
 >
->This enables private deployments where source code, technical evidence, and audit artifacts must remain within the organization’s infrastructure.
->
+> This enables private deployments where source code, technical evidence, and audit artifacts must remain within the organization’s infrastructure.
 >
 > ⚠️ **Important:** For repositories not owned by an organization, set `ENABLE_CODE_SCANNING_UPLOAD` to `false`.  
 > For organization-owned repositories, ensure that the **Security Policy** is properly configured under **Security & Quality → Overview**.
