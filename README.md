@@ -424,6 +424,7 @@ Create the following:
 | `ENABLE_GRADLE_LOCKFILE_GENERATION` | Enables optional Gradle lockfile generation (optional)           | `true` (default)                                             |
 | `USE_PREBUILT_APK`                  | Use an existing APK instead of building the project (optional)   | `false` (default)                                            |
 | `PREBUILT_APK_PATH`                 | Path to the prebuilt APK file (optional)                         | `apk/app-release.apk` (default)                              |
+| `JAVA_VERSION`                      | Java version to compile (optional)                               | `11` (default)                              |
 
 
 > ⚠️ **LLM Configuration:**  
@@ -469,6 +470,18 @@ Create the following:
 >
 > You can override this depending on your project.
 >
+> Example for multi-module Android projects:
+>
+> Some Android projects expose their release APK through a specific module and build variant. In those cases, override `ANDROID_BUILD_CMD` with the exact Gradle task instead of relying on the default `assembleRelease`.
+>
+> Example for Signal Android app:
+>
+> ```text
+> .\gradlew.bat --no-daemon clean :Signal-Android:assemblePlayProdRelease
+> ```
+>
+> This limits the build to the APK variant required for MobSF analysis and
+> avoids running broader or non-app build tasks unnecessarily.
 > ℹ️ **Gradle Lockfile Generation (optional):**  
 > If `ENABLE_GRADLE_LOCKFILE_GENERATION` is enabled, the pipeline will attempt to generate a `gradle.lockfile` before dependency analysis.  
 > 

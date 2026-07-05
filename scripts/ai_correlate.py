@@ -441,7 +441,7 @@ def build_llm_prompt(puid: str, req: Dict[str, Any], app_ctx: str, code: 'CodeHi
     trivy_brief = json.dumps(ev.trivy_summary) if ev.trivy_summary else "None"
 
     return f"""
-You are a **Senior Mobile Security Auditor** specialized in **Android healthcare apps**. Evaluate ONE requirement.
+You are a **Senior Mobile Security Auditor** specialized in **Android apps**. Evaluate ONE requirement.
 
 OUTPUT (STRICT JSON):
 - "decision": "YES"|"NO"|"N/A"|"MANUAL"
@@ -500,6 +500,7 @@ def llm_decide(puid: str, req: Dict[str, Any], app_ctx: str, code: CodeHints, ev
             input=prompt,
             reasoning={"effort": reasoning_effort},
             max_output_tokens=max_out,
+            temperature=0
         )
         if time.time() - start > timeout_s:
             return ("MANUAL", "LLM timeout -> manual review suggested", {"manual_steps": ["Revisar requisito en dispositivo/emulador y logs"]})

@@ -87,7 +87,7 @@ jobs:
         uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: '11'
+          java-version: ${{ vars.JAVA_VERSION || '11' }}
 
       - name: Write Gradle dependency locks
         if: ${{ vars.ENABLE_GRADLE_LOCKFILE_GENERATION != 'false' && hashFiles('**/gradle.lockfile') == '' }}

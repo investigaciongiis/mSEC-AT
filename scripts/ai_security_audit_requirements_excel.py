@@ -649,6 +649,7 @@ def translate_texts_to_english_via_openai(items: List[Dict[str, str]]) -> Dict[s
                 ],
                 max_output_tokens=max_tokens,
                 reasoning={"effort": effort},
+                temperature=0
             )
             txt = (getattr(resp, "output_text", "") or "").strip()
             m = re.search(r"\{.*\}\s*$", txt, flags=re.DOTALL)
@@ -735,6 +736,7 @@ def generate_justifications_via_openai(batch_ctx: List[Dict[str, Any]]) -> Dict[
                 ],
                 max_output_tokens=max_tokens,
                 reasoning={"effort": effort},
+                temperature=0
             )
             txt = (getattr(resp, "output_text", "") or "").strip()
             m = re.search(r"\{.*\}\s*$", txt, flags=re.DOTALL)

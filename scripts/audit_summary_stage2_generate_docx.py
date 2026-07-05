@@ -451,7 +451,7 @@ def _call_llm_for_style(patterns: List[Dict[str, Any]], likelihood_rubric: Dict[
         })
 
     system = (
-        "You are a senior security audit reporting specialist for peer-review publications. "
+        "You are a senior security audit reporting specialist. "
         "You will improve wording and generate actionable recommendations ONLY at the weakness-pattern level. "
         "You must NOT invent specific implemented controls. You must NOT invent metrics. "
         "You must NOT claim facts beyond the provided anchors and counts. "
@@ -475,7 +475,7 @@ def _call_llm_for_style(patterns: List[Dict[str, Any]], likelihood_rubric: Dict[
                 {
                     "pattern": "<exact pattern name from input>",
                     "expected": "<1-2 sentences>",
-                    "impact": "<1-2 sentences; CIA + regulatory for health data>",
+                    "impact": "<1-2 sentences; CIA + privacy/regulatory context where relevant>",
                     "recommendations": ["<6-10 bullets; practical; may include MFA/biometric step-up if appropriate>"]
                 }
             ]
@@ -490,6 +490,7 @@ def _call_llm_for_style(patterns: List[Dict[str, Any]], likelihood_rubric: Dict[
         ],
         max_output_tokens=max_tokens,
         reasoning={"effort": effort},
+        temperature=0
     )
 
     txt = (getattr(resp, "output_text", "") or "").strip()

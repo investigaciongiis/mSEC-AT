@@ -39,7 +39,7 @@ jobs:
         uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: '11'
+          java-version: ${{ vars.JAVA_VERSION || '11' }}
 
       - name: Download detekt CLI
         shell: bash

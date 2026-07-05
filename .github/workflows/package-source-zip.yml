@@ -11,7 +11,7 @@ jobs:
   package_source_zip:
     name: Zipped code source (app.zip)
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 180
 
     steps:
       - name: Checkout repository
