@@ -197,29 +197,6 @@ These artefacts support traceability and reproducibility:
 - 📄 [`mSEC-AT_evaluation.pdf`](https://github.com/investigaciongiis/mSEC-AT/raw/refs/heads/main/resources/evaluation/mSEC-AT_evaluation.pdf) documents the evaluation of **mSEC-AT**.
 - 📄 [`mSEC-AT_prompts.pdf`](https://github.com/investigaciongiis/mSEC-AT/raw/refs/heads/main/resources/prompts/mSEC-AT_prompts.pdf) documents the LLM prompt used by the AI-based requirements audit.
 
-## 🧩 Requirements Catalogue and Evidence Mapping
-
-The catalogue of **469 security requirements** used by **mSEC-AT** comes from **SECM-CAT**, a catalogue already developed and validated for **mHealth** after applying the **SIREN** methodology and the **ISO/IEC/IEEE 29148:2018** standard. It is based on **30 source documents**, including OWASP Mobile, secure development guidelines, ISO standards, NIST publications, and regulatory requirements. Each requirement is grouped according to the **OWASP Mobile Top 10 2024** and connected to its normative and technical sources.
-
-In **Vision360**, the catalogue is implemented as a parameterizable **JSON artefact**. Each requirement is associated with one or more evidence flags encoding positive controls, negative risk signals, and applicability conditions. These flags represent observable technical signals extracted from analysis tools such as **Trivy**, **MobSF**, **CodeQL**, **Semgrep**, or other available evidence sources.
-
-The evidence flags are not assigned ad hoc. They were iteratively refined through expert review and pilot testing before being incorporated into **mSEC-AT**, and they are represented through explicit and traceable rules that indicate the evidence source. The evaluation follows several principles: lack of scanner coverage is not automatically interpreted as a negative result; requirement–flag relationships remain stable to preserve comparability across audits; evidence from new tools is integrated into existing flags when the semantic meaning matches; and new signals can be exposed as optional flags for future catalogue extensions.
-
-This separation between the requirement–flag mapping and the rules used to compute flag values facilitates adaptation to other audit contexts. It allows new regulatory requirements, analysis tools, or domain-specific signals to be incorporated without redesigning the full evaluation model. The approach can also be adapted to other regulatory and security frameworks by creating a new JSON catalogue artefact and corresponding evidence flags linked to **SAST** and **DAST** tools.
-
-## 🤖 LLM Prompt Design and Reproducibility
-
-The LLM prompt was designed to reduce output variability and improve reproducibility through several control mechanisms:
-
-1. **Closed decision space:** The model is constrained to only four possible outcomes: `YES`, `NO`, `N/A`, and `MANUAL`. This restriction reduces interpretative freedom and prevents the generation of arbitrary classifications, improving consistency across executions.
-
-2. **Explicit decision criteria:** The prompt defines the conditions for each outcome. `NO` is associated with contradictory evidence, such as `allowBackup=true`, `debuggable=true`, exported components without adequate protection, or cleartext traffic being allowed. `N/A` is reserved for capabilities that are clearly absent from the application context, while `MANUAL` is only permitted when the available evidence is insufficient or ambiguous.
-
-3. **Strict structured output:** The response must follow a predefined JSON schema containing the decision, supporting evidence, rationale, and optional manual verification steps. This structured format limits response variability and facilitates automated validation.
-
-4. **Conservative positive decisions:** A `YES` decision is only allowed when the requirement is applicable and supported by positive evidence or by the absence of contradictory findings. This policy reduces optimistic classifications and encourages consistent handling of uncertain cases.
-
-5. **Evidence separated from reasoning:** The model receives information extracted from multiple analysis sources, including Manifest inspection, code hints, SARIF findings, MobSF reports, and Trivy results. The rationale is restricted to short justifications rather than unrestricted explanations, anchoring decisions in observable evidence and reducing variability caused by extensive free-form reasoning.
 
 ---
 
