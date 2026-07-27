@@ -469,6 +469,8 @@ Create the following:
 >
 > The default/example configuration uses OpenAI ChatGPT models. However, the LLM backend is configured through `LLM_BASE_URL` and `LLM_MODEL`. mSEC-AT uses the OpenAI Python client library as a communication layer, but it is not limited to OpenAI-hosted models. Any OpenAI-compatible endpoint can be used, including locally hosted or privately deployed models served through tools such as Ollama or vLLM.
 >
+> **Prompt maintenance.** The prompts used by mSEC-AT are defined within the project scripts and are maintained under version control together with the source code. If updates are required due to changes in LLM models or APIs, these modifications will be documented in the repository history to preserve reproducibility.
+>
 > Example configurations:
 >
 > ```text
